@@ -1,6 +1,6 @@
 // obj_game_manager Step Event
 if (global.game_state == "game" && !variable_instance_exists(id, "spawned")) {
-    spawned = true; // Run once
+    spawned = true;
 
     for (var i = 0; i < global.player_count; i++) {
         var p = global.players[i];
@@ -9,7 +9,14 @@ if (global.game_state == "game" && !variable_instance_exists(id, "spawned")) {
         inst.name = p.name;
         inst.class = p.class;
         inst.color = p.color;
-        inst.image_blend = global.available_colors[p.color];
-        inst.sprite_index = spr_player; // Replace with class-specific later
+
+        // Only set blend if valid color
+        if (p.color >= 0 && p.color < array_length(global.available_colors)) {
+            inst.image_blend = global.available_colors[p.color];
+        } else {
+            inst.image_blend = c_white; // Default
+        }
+
+        inst.sprite_index = spr_player;
     }
 }
