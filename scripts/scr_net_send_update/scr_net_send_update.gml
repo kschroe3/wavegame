@@ -3,7 +3,7 @@ function scr_net_send_update() {
 
     var buf = buffer_create(256, buffer_grow, 1);
     buffer_seek(buf, buffer_seek_start, 0);
-    buffer_write(buf, buffer_u8, 4); // CMD_PLAYER_UPDATE
+    buffer_write(buf, buffer_u8, 4);
     buffer_write(buf, buffer_u8, global.my_id);
     buffer_write(buf, buffer_string, global.players[global.my_id].name);
     buffer_write(buf, buffer_s8, global.players[global.my_id].class);
