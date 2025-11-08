@@ -1,6 +1,12 @@
-// obj_game_manager Step Event
-if (global.game_state == "game" && !variable_instance_exists(id, "spawned")) {
+// Debug: Confirm Step runs
+draw_set_color(c_red);
+draw_text(20, 80, "STEP RUNNING - State: " + global.game_state);
+
+// SPAWN PLAYERS ONCE
+if (global.game_state == "game" && !spawned) {
     spawned = true;
+
+    show_debug_message("SPAWNING " + string(global.player_count) + " PLAYERS");
 
     for (var i = 0; i < global.player_count; i++) {
         var p = global.players[i];
@@ -10,13 +16,13 @@ if (global.game_state == "game" && !variable_instance_exists(id, "spawned")) {
         inst.class = p.class;
         inst.color = p.color;
 
-        // Only set blend if valid color
         if (p.color >= 0 && p.color < array_length(global.available_colors)) {
             inst.image_blend = global.available_colors[p.color];
         } else {
-            inst.image_blend = c_white; // Default
+            inst.image_blend = c_white;
         }
 
         inst.sprite_index = spr_player;
+        show_debug_message("Spawned Player " + string(i) + ": " + p.name);
     }
 }

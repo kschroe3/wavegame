@@ -76,6 +76,7 @@ if (global.game_state == "menu") {
     draw_set_halign(fa_left);
     draw_text(20, 20, "WAVE GAME - IN PROGRESS");
     draw_text(20, 50, "Players: " + string(global.player_count));
+    draw_text(20, 80, "STEP RUNNING: " + string(variable_instance_exists(id, "spawned") ? "YES" : "NO"));
 } else if (global.game_state == "connecting") {
     draw_set_color(c_white);
     draw_text(display_get_gui_width()/2, display_get_gui_height()/2, "Connecting... (Port: " + string(global.port) + ")");
