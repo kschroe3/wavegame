@@ -57,7 +57,7 @@ if (global.game_state == "menu") {
         if (all_ready && scr_draw_button(display_get_gui_width()/2 - 120, 550, 240, 70, "START GAME")) {
             var buf = buffer_create(64, buffer_grow, 1);
             buffer_seek(buf, buffer_seek_start, 0);
-            buffer_write(buf, buffer_u8, 5); // CMD_START_GAME
+            buffer_write(buf, buffer_u8, 5);
             var size = buffer_tell(buf);
             for (var i = 1; i < global.player_count; i++) {
                 network_send_packet(global.players[i].socket, buf, size);
@@ -71,6 +71,11 @@ if (global.game_state == "menu") {
     }
 
     scr_lobby_ui();
+} else if (global.game_state == "game") {
+    draw_set_color(c_white);
+    draw_set_halign(fa_left);
+    draw_text(20, 20, "WAVE GAME - IN PROGRESS");
+    draw_text(20, 50, "Players: " + string(global.player_count));
 } else if (global.game_state == "connecting") {
     draw_set_color(c_white);
     draw_text(display_get_gui_width()/2, display_get_gui_height()/2, "Connecting... (Port: " + string(global.port) + ")");
