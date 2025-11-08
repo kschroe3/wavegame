@@ -68,11 +68,15 @@ if (type == network_type_data) {
     } else if (cmd == 3) {
         global.player_count = buffer_read(buffer, buffer_u8);
         for (var i = 0; i < global.player_count; i++) {
+            var name = buffer_read(buffer, buffer_string);
+            var class_id = buffer_read(buffer, buffer_s8);
+            var color_id = buffer_read(buffer, buffer_s8);
+            var ready = buffer_read(buffer, buffer_bool);
             global.players[i] = {
-                name: buffer_read(buffer, buffer_string),
-                class: buffer_read(buffer, buffer_s8),
-                color: buffer_read(buffer, buffer_s8),
-                ready: buffer_read(buffer, buffer_bool),
+                name: name,
+                class: class_id,
+                color: color_id,
+                ready: ready,
                 socket: -1
             };
         }

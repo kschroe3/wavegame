@@ -4,26 +4,32 @@ function scr_lobby_ui() {
     var my_player = global.players[global.my_id];
     if (my_player == noone) return;
 
-    var base_y = 600 + global.my_id * 110; // Move UI below player list
+    var base_y = 600; // Fixed position for all players, below list
     var x_center = display_get_gui_width() / 2;
 
+    // Name input
     if (my_player.name == "" || string_length(my_player.name) > 12) {
         my_player.name = get_string("Enter name (max 12):", "Player" + string(global.my_id + 1));
         scr_net_send_update();
     }
 
+    // Class select
     draw_set_color(c_white);
     draw_text(x_center - 300, base_y + 20, "Class:");
     for (var c = 0; c < 4; c++) {
         var btn_x = x_center - 250 + c * 80;
         var selected = (my_player.class == c);
         draw_set_color(selected ? c_lime : c_gray);
-        if (scr_draw_button(btn_x, base_y + 40, 70, 40, global.class_names[c])) {
+        if (scr_draw_button(btn_x, base_y + 40, 70, 40, "")) {
             my_player.class = c;
             scr_net_send_update();
         }
+        // Add black text for visibility
+        draw_set_color(c_black);
+        draw_text(btn_x + 35, base_y + 60, global.class_names[c]);
     }
 
+    // Color select
     draw_set_color(c_white);
     draw_text(x_center - 300, base_y + 80, "Color:");
     for (var col = 0; col < 4; col++) {
@@ -37,12 +43,16 @@ function scr_lobby_ui() {
         var btn_x = x_center - 250 + col * 80;
         var selected = (my_player.color == col);
         draw_set_color(taken ? c_dkgray : (selected ? c_lime : global.available_colors[col]));
-        if (!taken && scr_draw_button(btn_x, base_y + 100, 70, 40, global.color_names[col])) {
+        if (!taken && scr_draw_button(btn_x, base_y + 100, 70, 40, "")) {
             my_player.color = col;
             scr_net_send_update();
         }
+        // Add black text for visibility
+        draw_set_color(c_black);
+        draw_text(btn_x + 35, base_y + 120, global.color_names[col]);
     }
 
+    // Ready button
     var ready_text = my_player.ready ? "READY!" : "READY?";
     var ready_col = my_player.ready ? c_lime : c_yellow;
     draw_set_color(ready_col);

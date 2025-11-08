@@ -1,6 +1,6 @@
 function scr_net_sync_players() {
     if (!global.is_host) return;
-    
+
     var sync_buf = buffer_create(512, buffer_grow, 1);
     buffer_seek(sync_buf, buffer_seek_start, 0);
     buffer_write(sync_buf, buffer_u8, 3);
@@ -13,7 +13,7 @@ function scr_net_sync_players() {
         buffer_write(sync_buf, buffer_s8, p.color);
         buffer_write(sync_buf, buffer_bool, p.ready);
     }
-    
+
     var size = buffer_tell(sync_buf);
     for (var i = 1; i < global.player_count; i++) {
         var client_sock = global.players[i].socket;
