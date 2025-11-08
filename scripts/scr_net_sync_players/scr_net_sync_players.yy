@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_net_sync_players",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_net_sync_players",
+  "parent":{
+    "name":"network",
+    "path":"folders/network.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}

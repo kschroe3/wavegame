@@ -15,7 +15,8 @@ function scr_join_game() {
     var buf = buffer_create(256, buffer_grow, 1);
     buffer_write(buf, buffer_u8, 1); // CMD_JOIN
     buffer_write(buf, buffer_string, pass);
-    network_send_packet(global.socket, buf);
+    var size = buffer_tell(buf);
+    network_send_packet(global.socket, buf, size);
     buffer_delete(buf);
 
     global.game_state = "connecting";
