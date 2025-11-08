@@ -1,6 +1,12 @@
 var type = async_load[? "type"];
 var sock = async_load[? "socket"];
 
+if (type == network_type_connect && global.is_host) {
+    // Store socket when client connects
+    // Wait for CMD_JOIN packet
+    exit;
+}
+
 if (type == network_type_data) {
     var buffer = async_load[? "buffer"];
     buffer_seek(buffer, buffer_seek_start, 0);
@@ -34,7 +40,6 @@ if (type == network_type_data) {
         };
         global.player_count++;
         
-        // SEND CMD_ACCEPT
         var accept_buf = buffer_create(64, buffer_grow, 1);
         buffer_seek(accept_buf, buffer_seek_start, 0);
         buffer_write(accept_buf, buffer_u8, 0); // CMD_ACCEPT
@@ -60,8 +65,6 @@ if (type == network_type_data) {
         // Later
     }
     
-} else if (type == network_type_connect && global.is_host) {
-    // Wait for CMD_JOIN
 } else if (type == network_type_disconnect && global.is_host) {
     for (var i = 1; i < global.player_count; i++) {
         if (global.players[i] != noone && global.players[i].socket == sock) {
