@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_join_game",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_join_game",
+  "parent":{
+    "name":"network",
+    "path":"folders/network.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
