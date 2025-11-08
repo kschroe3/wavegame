@@ -4,7 +4,7 @@ function scr_lobby_ui() {
     var my_player = global.players[global.my_id];
     if (my_player == noone) return;
 
-    var base_y = 180 + global.my_id * 110;
+    var base_y = 600 + global.my_id * 110; // Move UI below player list
     var x_center = display_get_gui_width() / 2;
 
     if (my_player.name == "" || string_length(my_player.name) > 12) {

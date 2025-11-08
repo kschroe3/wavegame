@@ -17,6 +17,7 @@ if (global.game_state == "menu") {
     draw_set_color(c_yellow);
     draw_text(display_get_gui_width()/2, 80, "LOBBY - PASSCODE: " + global.passcode + " Port: " + string(global.port));
 
+    // PLAYER LIST
     for (var i = 0; i < 4; i++) {
         var y_pos = 180 + i * 110;
         var p = global.players[i];
@@ -28,8 +29,8 @@ if (global.game_state == "menu") {
         draw_text(display_get_gui_width()/2, y_pos, "Player " + string(i+1) + ": " + status);
 
         if (p != noone) {
-            var class_text = (p.class == -1) ? "?" : global.class_names[p.class];
-            var color_text = (p.color == -1) ? "?" : global.color_names[p.color];
+            var class_text = (p.class == -1 || p.class >= array_length(global.class_names)) ? "?" : global.class_names[p.class];
+            var color_text = (p.color == -1 || p.color >= array_length(global.color_names)) ? "?" : global.color_names[p.color];
             var ready_text = p.ready ? "YES" : "NO";
             var info = class_text + " | " + color_text + " | Ready: " + ready_text;
             if (i == global.my_id) info = "YOU | " + info;
@@ -39,11 +40,11 @@ if (global.game_state == "menu") {
 
     draw_set_color(c_white);
     if (global.is_host) {
-        if (scr_draw_button(display_get_gui_width()/2 - 120, 580, 240, 70, "START GAME")) {
+        if (scr_draw_button(display_get_gui_width()/2 - 120, 680, 240, 70, "START GAME")) {
             room_goto(rm_arena);
         }
     } else {
-        draw_text(display_get_gui_width()/2, 600, "Waiting for host...");
+        draw_text(display_get_gui_width()/2, 700, "Waiting for host...");
     }
 
     scr_lobby_ui();

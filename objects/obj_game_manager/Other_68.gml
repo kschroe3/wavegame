@@ -76,7 +76,6 @@ if (type == network_type_data) {
                 socket: -1
             };
         }
-        // Clear extra slots
         for (var i = global.player_count; i < 4; i++) {
             global.players[i] = noone;
         }
