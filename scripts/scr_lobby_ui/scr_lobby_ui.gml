@@ -7,7 +7,11 @@ function scr_lobby_ui() {
     var base_y = 400;
     var x_center = display_get_gui_width() / 2;
 
-    // Name input handled in Draw GUI
+    // Name input
+    if (my_player.name == "" || string_length(my_player.name) > 12) {
+        my_player.name = get_string("Enter name (max 12):", "Player" + string(global.my_id + 1));
+        scr_net_send_update();
+    }
 
     // Class select
     draw_set_color(c_white);

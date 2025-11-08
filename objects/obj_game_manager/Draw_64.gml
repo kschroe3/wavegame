@@ -74,9 +74,9 @@ if (global.game_state == "menu") {
 } else if (global.game_state == "game") {
     draw_set_color(c_white);
     draw_set_halign(fa_left);
-    draw_text(20, 20, "WAVE GAME - IN PROGRESS");
-    draw_text(20, 50, "Players: " + string(global.player_count));
-    draw_text(20, 80, "STEP RUNNING: YES");
+    draw_text(20, 20, "ROOM: " + room_get_name(room));
+    draw_text(20, 50, "PLAYERS: " + string(global.player_count));
+    draw_text(20, 80, "STEP RUNNING");
 } else if (global.game_state == "connecting") {
     draw_set_color(c_white);
     draw_text(display_get_gui_width()/2, display_get_gui_height()/2, "Connecting... (Port: " + string(global.port) + ")");

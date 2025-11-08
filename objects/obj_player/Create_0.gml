@@ -1,6 +1,6 @@
 my_id = -1;
-name = "Unknown";
+name = "ERROR";
 class = -1;
 color = -1;
 
-// Set in spawn code
+visible = true;
