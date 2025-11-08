@@ -11,9 +11,9 @@
   "defaultScriptType":1,
   "Folders":[
     {"$GMFolder":"","%Name":"core","folderPath":"folders/core.yy","name":"core","resourceType":"GMFolder","resourceVersion":"2.0",},
-    {"$GMFolder":"","%Name":"ui","folderPath":"folders/ui.yy","name":"ui","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"lobby","folderPath":"folders/lobby.yy","name":"lobby","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"network","folderPath":"folders/network.yy","name":"network","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"ui","folderPath":"folders/ui.yy","name":"ui","resourceType":"GMFolder","resourceVersion":"2.0",},
   ],
   "ForcedPrefabProjectReferences":[],
   "IncludedFiles":[],

@@ -56,12 +56,12 @@ if (type == network_type_data) {
         room_goto(rm_main_menu);
         
     } else if (cmd == 3) { // CMD_PLAYER_LIST
-        // Parse later
+        // Parse player list later
     }
-    // NO buffer_delete(buffer) — GMS2 auto-deletes incoming buffer
+    // GMS2 AUTO deletes incoming buffer -- NO buffer_delete(buffer)
     
 } else if (type == network_type_connect && global.is_host) {
-    // Wait for CMD_JOIN
+    // Client connected, wait for CMD_JOIN packet
 } else if (type == network_type_disconnect && global.is_host) {
     for (var i = 1; i < global.player_count; i++) {
         if (global.players[i] != noone && global.players[i].socket == sock) {
