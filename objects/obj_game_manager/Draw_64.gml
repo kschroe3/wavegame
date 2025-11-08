@@ -18,14 +18,22 @@ if (global.game_state == "menu") {
     draw_text(display_get_gui_width()/2, 80, "LOBBY - PASSCODE: " + global.passcode + " Port: " + string(global.port));
 
     for (var i = 0; i < 4; i++) {
-        var y_pos = 180 + i * 50; // Reduce spacing for list
+        var y_pos = 180 + i * 60; // Compact list
         var p = global.players[i];
         var status = (p == noone) ? "EMPTY" : p.name;
         var col = (p == noone) ? c_gray : c_white;
         if (i == global.my_id) col = c_lime;
 
         draw_set_color(col);
-        draw_text(display_get_gui_width()/2, y_pos, "Player " + string(i+1) + ": " + status);
+        draw_text(display_get_gui_width()/2 - 100, y_pos, "Player " + string(i+1) + ": " + status);
+        
+        // Clickable name for own slot
+        if (i == global.my_id && p != noone) {
+            if (mouse_check_button_pressed(mb_left) && point_in_rectangle(mouse_x, mouse_y, display_get_gui_width()/2 - 100, y_pos - 10, display_get_gui_width()/2 + 200, y_pos + 10)) {
+                p.name = get_string("Change name (max 12):", p.name);
+                scr_net_send_update();
+            }
+        }
 
         if (p != noone) {
             var class_text = (p.class == -1) ? "?" : global.class_names[p.class];
@@ -39,11 +47,11 @@ if (global.game_state == "menu") {
 
     draw_set_color(c_white);
     if (global.is_host) {
-        if (scr_draw_button(display_get_gui_width()/2 - 120, 480, 240, 70, "START GAME")) {
+        if (scr_draw_button(display_get_gui_width()/2 - 120, 550, 240, 70, "START GAME")) {
             room_goto(rm_arena);
         }
     } else {
-        draw_text(display_get_gui_width()/2, 500, "Waiting for host...");
+        draw_text(display_get_gui_width()/2, 560, "Waiting for host...");
     }
 
     scr_lobby_ui();

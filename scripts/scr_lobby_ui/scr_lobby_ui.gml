@@ -4,14 +4,11 @@ function scr_lobby_ui() {
     var my_player = global.players[global.my_id];
     if (my_player == noone) return;
 
-    var base_y = 600; // Fixed position for all players, below list
+    var base_y = 400; // Fixed position above start/waiting for all players
+
     var x_center = display_get_gui_width() / 2;
 
-    // Name input
-    if (my_player.name == "" || string_length(my_player.name) > 12) {
-        my_player.name = get_string("Enter name (max 12):", "Player" + string(global.my_id + 1));
-        scr_net_send_update();
-    }
+    // Name input handled in Draw GUI on click
 
     // Class select
     draw_set_color(c_white);
@@ -24,7 +21,6 @@ function scr_lobby_ui() {
             my_player.class = c;
             scr_net_send_update();
         }
-        // Add black text for visibility
         draw_set_color(c_black);
         draw_text(btn_x + 35, base_y + 60, global.class_names[c]);
     }
@@ -47,7 +43,6 @@ function scr_lobby_ui() {
             my_player.color = col;
             scr_net_send_update();
         }
-        // Add black text for visibility
         draw_set_color(c_black);
         draw_text(btn_x + 35, base_y + 120, global.color_names[col]);
     }
