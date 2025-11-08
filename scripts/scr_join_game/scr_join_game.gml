@@ -1,18 +1,19 @@
 function scr_join_game() {
     var ip = get_string("Host IP:", "127.0.0.1");
-    var port = real(get_string("Port:", "25565"));
+    var port = real(get_string("Port:", string(global.port)));
     var pass = get_string("Passcode:", "");
 
     global.socket = network_create_socket(network_socket_tcp);
     var connected = network_connect(global.socket, ip, port);
-    if (!connected) {
-        show_message("Connection failed!");
+    show_message("Connect result: " + string(connected)); // Debug: 0 success, <0 fail
+
+    if (connected < 0) {
+        show_message("Connection failed! Check if host is running, port matches, or firewall/antivirus.");
         network_destroy(global.socket);
         global.socket = -1;
         exit;
     }
 
-    // Send passcode with seek
     var buf = buffer_create(256, buffer_grow, 1);
     buffer_seek(buf, buffer_seek_start, 0);
     buffer_write(buf, buffer_u8, 1); // CMD_JOIN

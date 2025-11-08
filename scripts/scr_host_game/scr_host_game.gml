@@ -1,12 +1,19 @@
 function scr_host_game() {
     var pass = get_string("Set Passcode:", "");
-    if (pass == "") exit;
+    if (pass == "") {
+        show_message("Host canceled - passcode empty");
+        exit;
+    }
 
     global.passcode = pass;
     global.is_host = true;
     global.socket = network_create_server(network_socket_tcp, global.port, 4);
+    show_message("Server create result: " + string(global.socket)); // Debug: Show value (>=0 success, <0 fail)
+
     if (global.socket < 0) {
-        show_message("Failed to host!");
+        show_message("Failed to host! Port may be in use or blocked. Try different port or check antivirus.");
+        global.is_host = false;
+        global.socket = -1;
         exit;
     }
 
