@@ -10,6 +10,7 @@
     {"name":"rm_arena","order":2,"path":"rooms/rm_arena/rm_arena.yy",},
     {"name":"rm_lobby","order":1,"path":"rooms/rm_lobby/rm_lobby.yy",},
     {"name":"scr_join_game","order":1,"path":"scripts/scr_join_game/scr_join_game.yy",},
+    {"name":"scr_net_send_update","order":3,"path":"scripts/scr_net_send_update/scr_net_send_update.yy",},
     {"name":"scr_net_sync_players","order":2,"path":"scripts/scr_net_sync_players/scr_net_sync_players.yy",},
     {"name":"spr_player","order":4,"path":"sprites/spr_player/spr_player.yy",},
   ],

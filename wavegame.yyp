@@ -32,6 +32,8 @@
     {"id":{"name":"scr_host_game","path":"scripts/scr_host_game/scr_host_game.yy",},},
     {"id":{"name":"scr_init_game","path":"scripts/scr_init_game/scr_init_game.yy",},},
     {"id":{"name":"scr_join_game","path":"scripts/scr_join_game/scr_join_game.yy",},},
+    {"id":{"name":"scr_lobby_ui","path":"scripts/scr_lobby_ui/scr_lobby_ui.yy",},},
+    {"id":{"name":"scr_net_send_update","path":"scripts/scr_net_send_update/scr_net_send_update.yy",},},
     {"id":{"name":"scr_net_sync_players","path":"scripts/scr_net_sync_players/scr_net_sync_players.yy",},},
     {"id":{"name":"spr_player","path":"sprites/spr_player/spr_player.yy",},},
   ],

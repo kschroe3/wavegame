@@ -10,4 +10,9 @@ function scr_init_game() {
     global.player_count = 0;
     global.my_id = -1;
     global.pending_socket = -1;
+
+    // Class data
+    global.class_names = ["Warrior", "Wizard", "Archer", "Cleric"];
+    global.class_colors = [c_red, c_blue, c_green, c_orange];
+    global.available_colors = [c_red, c_blue, c_green, c_yellow];
 }

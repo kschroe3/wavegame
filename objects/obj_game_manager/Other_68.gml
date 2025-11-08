@@ -66,7 +66,17 @@ if (type == network_type_data) {
         room_goto(rm_main_menu);
         
     } else if (cmd == 3) {
-        // Later
+        // Sync later
+    } else if (cmd == 4 && global.is_host) {
+        var pid = buffer_read(buffer, buffer_u8);
+        var p = global.players[pid];
+        if (p != noone) {
+            p.name = buffer_read(buffer, buffer_string);
+            p.class = buffer_read(buffer, buffer_s8);
+            p.color = buffer_read(buffer, buffer_s8);
+            p.ready = buffer_read(buffer, buffer_bool);
+        }
+        scr_net_sync_players();
     }
     
 } else if (type == network_type_disconnect && global.is_host) {

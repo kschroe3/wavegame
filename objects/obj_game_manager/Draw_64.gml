@@ -5,7 +5,7 @@ if (global.game_state == "menu") {
     draw_set_color(c_white);
     draw_set_halign(fa_center);
     draw_text(display_get_gui_width()/2, 150, "WAVE GAME");
-    draw_text(display_get_gui_width()/2, 200, "Port: " + string(global.port)); // Show port
+    draw_text(display_get_gui_width()/2, 200, "Port: " + string(global.port));
 
     if (scr_draw_button(display_get_gui_width()/2 - 100, 280, 200, 60, "HOST")) {
         scr_host_game();
@@ -28,7 +28,7 @@ if (global.game_state == "menu") {
         draw_text(display_get_gui_width()/2, y_pos, "Player " + string(i+1) + ": " + status);
 
         if (p != noone && i == global.my_id) {
-            draw_text(display_get_gui_width()/2, y_pos + 30, "← YOU | Class: ? | Color: ? | Ready: NO");
+            draw_text(display_get_gui_width()/2, y_pos + 30, "YOU | Class: ? | Color: ? | Ready: NO");
         }
     }
 
@@ -40,6 +40,8 @@ if (global.game_state == "menu") {
     } else {
         draw_text(display_get_gui_width()/2, 600, "Waiting for host to start...");
     }
+
+    scr_lobby_ui();
 } else if (global.game_state == "connecting") {
     draw_set_color(c_white);
     draw_text(display_get_gui_width()/2, display_get_gui_height()/2, "Connecting... (Port: " + string(global.port) + ")");

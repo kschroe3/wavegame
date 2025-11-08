@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"scr_net_send_update",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"scr_net_send_update",
+  "parent":{
+    "name":"network",
+    "path":"folders/network.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
