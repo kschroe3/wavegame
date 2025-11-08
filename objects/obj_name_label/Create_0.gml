@@ -1,0 +1,1 @@
+owner = other.id; // Set in obj_player create

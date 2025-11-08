@@ -27,7 +27,6 @@ if (global.game_state == "menu") {
         draw_set_color(col);
         draw_text(display_get_gui_width()/2 - 100, y_pos, "Player " + string(i+1) + ": " + status);
 
-        // Clickable name for own slot
         if (i == global.my_id && p != noone && !p.ready) {
             if (mouse_check_button_pressed(mb_left) && point_in_rectangle(mouse_x, mouse_y, display_get_gui_width()/2 - 100, y_pos - 10, display_get_gui_width()/2 + 200, y_pos + 10)) {
                 p.name = get_string("Change name (max 12):", p.name);
@@ -47,7 +46,24 @@ if (global.game_state == "menu") {
 
     draw_set_color(c_white);
     if (global.is_host) {
-        if (scr_draw_button(display_get_gui_width()/2 - 120, 550, 240, 70, "START GAME")) {
+        var all_ready = true;
+        for (var i = 0; i < global.player_count; i++) {
+            if (global.players[i] == noone || !global.players[i].ready) {
+                all_ready = false;
+                break;
+            }
+        }
+        draw_set_color(all_ready ? c_lime : c_dkgray);
+        if (all_ready && scr_draw_button(display_get_gui_width()/2 - 120, 550, 240, 70, "START GAME")) {
+            var buf = buffer_create(64, buffer_grow, 1);
+            buffer_seek(buf, buffer_seek_start, 0);
+            buffer_write(buf, buffer_u8, 5); // CMD_START_GAME
+            var size = buffer_tell(buf);
+            for (var i = 1; i < global.player_count; i++) {
+                network_send_packet(global.players[i].socket, buf, size);
+            }
+            buffer_delete(buf);
+            global.game_state = "game";
             room_goto(rm_arena);
         }
     } else {

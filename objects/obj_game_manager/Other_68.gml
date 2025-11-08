@@ -94,6 +94,10 @@ if (type == network_type_data) {
             p.ready = buffer_read(buffer, buffer_bool);
         }
         scr_net_sync_players();
+        
+    } else if (cmd == 5 && !global.is_host) {
+        global.game_state = "game";
+        room_goto(rm_arena);
     }
     
 } else if (type == network_type_disconnect && global.is_host) {
