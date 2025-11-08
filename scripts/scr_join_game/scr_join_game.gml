@@ -12,11 +12,12 @@ function scr_join_game() {
         exit;
     }
 
+    // Send passcode with seek
     var buf = buffer_create(256, buffer_grow, 1);
+    buffer_seek(buf, buffer_seek_start, 0);
     buffer_write(buf, buffer_u8, 1); // CMD_JOIN
     buffer_write(buf, buffer_string, pass);
-    var size = buffer_tell(buf);
-    network_send_packet(global.socket, buf, size);
+    network_send_packet(global.socket, buf, buffer_tell(buf));
     buffer_delete(buf);
 
     global.game_state = "connecting";

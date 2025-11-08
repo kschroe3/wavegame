@@ -11,7 +11,8 @@ if (type == network_type_data) {
         
         if (client_pass != global.passcode) {
             var reject_buf = buffer_create(64, buffer_grow, 1);
-            buffer_write(reject_buf, buffer_u8, 2);
+            buffer_seek(reject_buf, buffer_seek_start, 0);
+            buffer_write(reject_buf, buffer_u8, 2); // CMD_REJECT
             network_send_packet(sock, reject_buf, buffer_tell(reject_buf));
             buffer_delete(reject_buf);
             network_destroy(sock);
@@ -34,6 +35,7 @@ if (type == network_type_data) {
         global.player_count++;
         
         var accept_buf = buffer_create(64, buffer_grow, 1);
+        buffer_seek(accept_buf, buffer_seek_start, 0);
         buffer_write(accept_buf, buffer_u8, 0); // CMD_ACCEPT
         buffer_write(accept_buf, buffer_u8, new_id);
         network_send_packet(sock, accept_buf, buffer_tell(accept_buf));
@@ -54,11 +56,12 @@ if (type == network_type_data) {
         room_goto(rm_main_menu);
         
     } else if (cmd == 3) { // CMD_PLAYER_LIST
-        // Will parse in UI later
+        // Parse later
     }
+    // NO buffer_delete(buffer) — GMS2 auto-deletes incoming buffer
     
 } else if (type == network_type_connect && global.is_host) {
-    // Wait for CMD_JOIN packet
+    // Wait for CMD_JOIN
 } else if (type == network_type_disconnect && global.is_host) {
     for (var i = 1; i < global.player_count; i++) {
         if (global.players[i] != noone && global.players[i].socket == sock) {
