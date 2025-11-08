@@ -1,0 +1,35 @@
+# WaveGame GDD - Brothers Multiplayer Survival
+Last Update: Nov 2025  
+Repo: https://github.com/kschroe3/wavegame
+
+## 1. Overview
+- Genre: 1-4 Player Online Wave Survival
+- Core Loop: Lobby → Class Select → Survive Waves → Boss Every 10 → Loot → Repeat
+- Win: Highest wave reached
+- Players: P2P (Host = server)
+
+## 2. Classes
+| Class | Strong vs | Weak vs | Color Options |
+|-------|-----------|---------|---------------|
+| Warrior | Ranged | Magic | Red, Blue, Green, Yellow |
+| Wizard | Melee | Ranged | (unique per lobby) |
+| Archer | Magic | Melee | |
+| Cleric | Healing | All | |
+
+## 3. Rooms
+- `rm_main_menu` → Host/Join
+- `rm_lobby` → Passcode, player list, class select
+- `rm_arena` → Game
+
+## 4. Progress
+| Milestone | Status |
+|-----------|--------|
+| Repo Setup | Done |
+| GDD | Doing now |
+| Lobby Connect | Next |
+| Class Select | |
+| Wave 1 | |
+
+## 5. TODO
+- [ ] Test host + join locally
+- [ ] Add class dropdowns
