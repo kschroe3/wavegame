@@ -3,7 +3,7 @@ function scr_net_sync_players() {
     
     var sync_buf = buffer_create(512, buffer_grow, 1);
     buffer_seek(sync_buf, buffer_seek_start, 0);
-    buffer_write(sync_buf, buffer_u8, 3); // CMD_PLAYER_LIST
+    buffer_write(sync_buf, buffer_u8, 3);
     buffer_write(sync_buf, buffer_u8, global.player_count);
     for (var i = 0; i < global.player_count; i++) {
         var p = global.players[i];

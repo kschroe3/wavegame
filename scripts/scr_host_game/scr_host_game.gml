@@ -12,10 +12,9 @@ function scr_host_game() {
         exit;
     }
 
-    // SUCCESS — GO TO LOBBY
     global.players[0] = {name: "Host", class: -1, color: -1, ready: false, socket: -1};
     global.player_count = 1;
     global.my_id = 0;
     global.game_state = "lobby";
-    room_goto(rm_lobby); // THIS MUST RUN
+    room_goto(rm_lobby);
 }
