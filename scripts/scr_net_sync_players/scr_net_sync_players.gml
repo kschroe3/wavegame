@@ -15,7 +15,7 @@ function scr_net_sync_players() {
     }
     
     var size = buffer_tell(sync_buf);
-    for (var i = 0; i < global.player_count; i++) {
+    for (var i = 1; i < global.player_count; i++) {
         var client_sock = global.players[i].socket;
         if (client_sock > 0) {
             network_send_packet(client_sock, sync_buf, size);

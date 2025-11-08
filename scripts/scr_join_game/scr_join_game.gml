@@ -5,10 +5,8 @@ function scr_join_game() {
 
     global.socket = network_create_socket(network_socket_tcp);
     var connected = network_connect(global.socket, ip, port);
-    show_message("Connect result: " + string(connected) + " on port " + string(port));
-
     if (connected < 0) {
-        show_message("Connection failed! Host running? Port match? Firewall?");
+        show_message("Connection failed!");
         network_destroy(global.socket);
         global.socket = -1;
         exit;
