@@ -1,16 +1,18 @@
-// Debug: Confirm Step runs
-draw_set_color(c_red);
-draw_text(20, 80, "STEP RUNNING - State: " + global.game_state);
-
-// SPAWN PLAYERS ONCE
-if (global.game_state == "game" && !spawned) {
+// obj_game_manager Step Event
+if (global.game_state == "game" && !variable_instance_exists(id, "spawned")) {
     spawned = true;
 
-    show_debug_message("SPAWNING " + string(global.player_count) + " PLAYERS");
+    show_debug_message("SPAWNING " + string(global.player_count) + " PLAYERS IN rm_arena");
+
+    // Ensure layer exists
+    var inst_layer = layer_get_id("Instances");
+    if (inst_layer == -1) {
+        inst_layer = layer_create(0, "Instances");
+    }
 
     for (var i = 0; i < global.player_count; i++) {
         var p = global.players[i];
-        var inst = instance_create_layer(200 + i * 250, room_height / 2, "Instances", obj_player);
+        var inst = instance_create_layer(200 + i * 300, room_height / 2, "Instances", obj_player);
         inst.my_id = i;
         inst.name = p.name;
         inst.class = p.class;
@@ -23,6 +25,6 @@ if (global.game_state == "game" && !spawned) {
         }
 
         inst.sprite_index = spr_player;
-        show_debug_message("Spawned Player " + string(i) + ": " + p.name);
+        show_debug_message("Spawned: " + p.name + " at X=" + string(inst.x));
     }
 }
